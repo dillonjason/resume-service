@@ -1,6 +1,8 @@
 {
   "database": {
     "url": "mongodb://db:27017",
-    "name": "resume"
+    "name": "resume",
+    "user": "root",
+    "password": "password"
   }
 }

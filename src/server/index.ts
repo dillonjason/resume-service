@@ -1,13 +1,25 @@
 import fastify from "fastify";
-import "../data";
+import connect from "../data";
 
 import PersonalModel from "../data/schema/personal";
 
 const app = fastify({ logger: true });
+connect();
 
 app.get("/", async (request, reply) => {
   const personalData = await PersonalModel.findOne().exec();
   reply.send(personalData);
+});
+
+app.get("/create", async (request, reply) => {
+  const newPersonal = await PersonalModel.create({
+    firstName: "Dillon",
+    lastName: "Jason",
+    email: "test@test.com",
+    phone: "123-456-7890",
+  });
+
+  reply.send(newPersonal);
 });
 
 app.listen(80, "0.0.0.0", (error, address) => {

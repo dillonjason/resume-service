@@ -1,9 +1,20 @@
 import mongoose from "mongoose";
 import config from "config";
 
-console.log(`${config.get("database.url")}/${config.get("database.name")}`);
-
-mongoose.connect(
-  `${config.get("database.url")}/${config.get("database.name")}`,
-  { useUnifiedTopology: true, useNewUrlParser: true }
-);
+export default function (): void {
+  mongoose.connect(
+    config.get("database.url"),
+    {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      auth: {
+        user: config.get("database.user"),
+        password: config.get("database.password"),
+      },
+      dbName: config.get("database.name"),
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
