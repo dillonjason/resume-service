@@ -1,19 +1,21 @@
 version: "3.9"
 services:
-  # personal-data-manager:
-  #   build: .
-  #   ports:
-  #     - 80:5001
+  resume:
+    build: .
+    ports:
+      - "5001:80"
+    networks:
+      - db-network
   db:
     image: mongo
     container_name: db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=password
-    volumes: 
+    volumes:
       - db-data:/data/db
     ports:
-      - 27017:27017
+      - "27017:27017"
     networks:
       - db-network
   mongo-express:
@@ -29,7 +31,7 @@ services:
     depends_on:
       - db
     ports:
-      - 8081:8081
+      - "8081:8081"
 volumes:
   db-data:
     name: db-data
