@@ -1,7 +1,25 @@
 {
-  "name": "personal-data-manager",
+  "name": "resume-service",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Dillon Jason <djasuar@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/config": "^0.0.38",
+    "@types/node": "^14.14.41",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-config-standard": "^16.0.2",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "config": "^3.3.6",
+    "fastify": "^3.14.2",
+    "mongoose": "^5.12.4",
+    "node-config": "^0.0.2"
+  }
 }
