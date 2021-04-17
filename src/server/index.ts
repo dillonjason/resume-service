@@ -1,32 +1,17 @@
 import fastify from "fastify";
+import config from "config";
 import connect from "../data";
 
-import PersonalModel from "../data/schema/personal";
+import personal from "./routes/personal";
 
 const app = fastify({ logger: true });
 connect();
 
-app.get("/", async (request, reply) => {
-  const personalData = await PersonalModel.findOne().exec();
-  reply.send(personalData);
-});
+app.register(personal);
 
-app.get("/create", async (request, reply) => {
-  const newPersonal = await PersonalModel.create({
-    firstName: "Dillon",
-    lastName: "Jason",
-    email: "test@test.com",
-    phone: "123-456-7890",
-  });
-
-  reply.send(newPersonal);
-});
-
-app.listen(80, "0.0.0.0", (error, address) => {
+app.listen(config.get("app.port"), "0.0.0.0", (error) => {
   if (error) {
     app.log.error(error);
     process.exit(1);
   }
-
-  app.log.info(`server listening on ${address}`);
 });

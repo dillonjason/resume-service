@@ -14,7 +14,9 @@ export default function (): void {
       dbName: config.get("database.name"),
     },
     (error) => {
-      console.error(error);
+      if (error) {
+        console.error(error);
+      }
     }
   );
 }
