@@ -7,5 +7,8 @@
     "name": "resume",
     "user": "root",
     "password": "password"
+  },
+  "auth": {
+    "url": "http://auth-service/auth/validate"
   }
 }
