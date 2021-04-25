@@ -1,11 +1,30 @@
 version: "3.9"
 services:
-  resume:
+  service:
     build: .
+    working_dir: /app
+    command: ['yarn', 'dev']
+    volumes: 
+      - .:/app
     ports:
       - "5001:80"
     networks:
       - db-network
+  auth:
+    image: djasuar/auth-service:latest
+    container_name: auth
+    command: ['yarn', 'start']
+    environment:
+      - DATABASE_URL=mongodb://db:27017
+      - DATABASE_NAME=auth
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=password
+    ports:
+      - "5002:80"
+    networks:
+      - db-network
+    depends_on:
+      - db
   db:
     image: mongo
     container_name: db
