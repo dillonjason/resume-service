@@ -1,8 +1,13 @@
 import mongoose from "mongoose";
 import config from "config";
+import { FastifyPluginCallback } from "fastify";
 
-export default function (): void {
-  mongoose.connect(
+export const connectDatabase: FastifyPluginCallback = async (
+  app,
+  options,
+  next
+) => {
+  await mongoose.connect(
     config.get("database.url"),
     {
       useUnifiedTopology: true,
@@ -15,8 +20,11 @@ export default function (): void {
     },
     (error) => {
       if (error) {
-        console.error(error);
+        app.log.error(error);
+        process.exit(1);
       }
     }
   );
-}
+
+  next();
+};

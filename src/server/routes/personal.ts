@@ -3,7 +3,7 @@ import PersonalModel, { PersonalDocument } from "../../data/schema/personal";
 
 const Path = "/personal";
 
-const personal: FastifyPluginCallback = (app, options, done) => {
+const personal: FastifyPluginCallback = (app, options, next) => {
   app.post(Path, async (request, reply) => {
     const newPersonal = await PersonalModel.create(request.body);
     reply.send(newPersonal);
@@ -26,15 +26,18 @@ const personal: FastifyPluginCallback = (app, options, done) => {
     }
   );
 
-  app.put<{ Params: { id: string } }>(`${Path}/:id`, async (request, reply) => {
-    const updatedPersonal = request.body as Partial<PersonalDocument>;
-    const newPersonal = await PersonalModel.findByIdAndUpdate(
-      request.params.id,
-      updatedPersonal,
-      { new: true }
-    );
-    reply.send(newPersonal);
-  });
+  app.put<{ Params: { id: string }; Body: Partial<PersonalDocument> }>(
+    `${Path}/:id`,
+    async (request, reply) => {
+      const updatedPersonal = request.body;
+      const newPersonal = await PersonalModel.findByIdAndUpdate(
+        request.params.id,
+        updatedPersonal,
+        { new: true }
+      );
+      reply.send(newPersonal);
+    }
+  );
 
   app.delete<{ Params: { id: string } }>(
     `${Path}/:id`,
@@ -44,7 +47,7 @@ const personal: FastifyPluginCallback = (app, options, done) => {
     }
   );
 
-  done();
+  next();
 };
 
 export default personal;
