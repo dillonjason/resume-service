@@ -7,6 +7,11 @@ interface Personal {
   lastName: string;
   email: string;
   phone: string;
+  github?: string;
+  linkedin?: string;
+  resume?: string;
+  bio?: string;
+  active: boolean;
 }
 
 export interface PersonalDocument extends Personal, Document {}
@@ -29,10 +34,22 @@ const PersonalSchema = new Schema<PersonalDocument, PersonalModel>({
       validator: phoneValidator,
     },
   },
+  github: {
+    type: String,
+  },
+  linkedin: {
+    type: String,
+  },
+  resume: {
+    type: String,
+  },
+  bio: {
+    type: String,
+  },
   active: { type: Boolean, default: false },
 });
 
-export default model<PersonalDocument, PersonalModel>(
+export const PersonalModel = model<PersonalDocument, PersonalModel>(
   "Personal",
   PersonalSchema
 );

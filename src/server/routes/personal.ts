@@ -1,5 +1,5 @@
 import { FastifyPluginCallback } from "fastify";
-import PersonalModel, { PersonalDocument } from "../../data/schema/personal";
+import { PersonalModel, PersonalDocument } from "../../data/schema/personal";
 import { authenticate } from "../hooks/authenticate";
 
 const Path = "/personal";
