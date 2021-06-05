@@ -5,6 +5,12 @@ import { ExperienceDataSource } from "./experience/dataSource";
 import { PersonalDataSource } from "./personal/dataSource";
 import { SkillDataSource } from "./skill/dataSource";
 
+export interface DataSources {
+  personal: PersonalDataSource;
+  experience: ExperienceDataSource;
+  skill: SkillDataSource;
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const dataSources = () => ({
   personal: new PersonalDataSource(PersonalModel),
