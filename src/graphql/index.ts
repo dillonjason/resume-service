@@ -1,19 +1,14 @@
 import { ApolloServer } from "apollo-server-fastify";
 import { FastifyPluginCallback } from "fastify";
-import { PersonalModel } from "../data/schema/personal";
-import { PersonalDataSource } from "./dataSources/personal";
 
-import { typeDefs } from "./typesDefs";
 import { resolvers } from "./resolvers";
+import { typeDefs } from "./typeDefs";
+import { dataSources } from "./dataSources";
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({
-    personal: new PersonalDataSource(PersonalModel),
-  }),
-  playground: true,
-  introspection: true,
+  dataSources,
 });
 
 export const apolloServer = async (): Promise<FastifyPluginCallback> => {

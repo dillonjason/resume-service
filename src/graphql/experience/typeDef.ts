@@ -4,7 +4,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
-import { SkillType } from "./skill";
+import { SkillType } from "../skill/typeDef";
 
 export const ExperienceType = new GraphQLObjectType({
   name: "Experience",

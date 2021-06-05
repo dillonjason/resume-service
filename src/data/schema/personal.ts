@@ -11,7 +11,6 @@ interface Personal {
   linkedin?: string;
   resume?: string;
   bio?: string;
-  active: boolean;
 }
 
 export interface PersonalDocument extends Personal, Document {}
@@ -46,7 +45,6 @@ const PersonalSchema = new Schema<PersonalDocument, PersonalModel>({
   bio: {
     type: String,
   },
-  active: { type: Boolean, default: false },
 });
 
 export const PersonalModel = model<PersonalDocument, PersonalModel>(
