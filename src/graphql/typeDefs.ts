@@ -3,11 +3,16 @@ import {
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLSchema,
+  GraphQLString,
   printSchema,
 } from "graphql";
 
 import { ExperienceType } from "./experience/typeDef";
-import { CreatePersonalInputType, PersonalType } from "./personal/typeDef";
+import {
+  CreatePersonalInputType,
+  PersonalType,
+  UpdatePersonalInputType,
+} from "./personal/typeDef";
 import { SkillType } from "./skill/typeDef";
 
 export const QueryType = new GraphQLObjectType({
@@ -26,6 +31,19 @@ export const MutationType = new GraphQLObjectType({
       type: GraphQLNonNull(PersonalType),
       args: {
         data: { type: CreatePersonalInputType },
+      },
+    },
+    updatePersonal: {
+      type: GraphQLNonNull(PersonalType),
+      args: {
+        id: { type: GraphQLString },
+        data: { type: UpdatePersonalInputType },
+      },
+    },
+    deletePersonal: {
+      type: GraphQLNonNull(PersonalType),
+      args: {
+        id: { type: GraphQLString },
       },
     },
   },

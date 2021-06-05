@@ -1,9 +1,11 @@
+import { IFieldResolver } from "apollo-server-fastify";
+import { Context } from "../..";
 import { PersonalDocument } from "../../../data/schema/personal";
-import { PersonalDataSource } from "../dataSource";
 
-export function create(
-  personalDataSource: PersonalDataSource,
-  data: PersonalDocument
-): Promise<PersonalDocument> {
-  return personalDataSource.create(data);
-}
+export const create: IFieldResolver<
+  unknown,
+  Context,
+  { data: PersonalDocument }
+> = (_, { data }, { dataSources }): Promise<PersonalDocument> => {
+  return dataSources.personal.create(data);
+};

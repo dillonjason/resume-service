@@ -1,8 +1,11 @@
+import { IFieldResolver } from "apollo-server-fastify";
+import { Context } from "../../";
 import { ExperienceDocument } from "../../../data/schema/experience";
-import { ExperienceDataSource } from "../dataSource";
 
-export function get(
-  experienceDataSource: ExperienceDataSource
-): Promise<ExperienceDocument[]> {
-  return experienceDataSource.get();
-}
+export const get: IFieldResolver<unknown, Context> = (
+  _,
+  __,
+  { dataSources }
+): Promise<ExperienceDocument[] | null | undefined> => {
+  return dataSources.experience.get();
+};

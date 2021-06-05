@@ -1,8 +1,11 @@
+import { IFieldResolver } from "apollo-server-fastify";
+import { Context } from "../../";
 import { PersonalDocument } from "../../../data/schema/personal";
-import { PersonalDataSource } from "../dataSource";
 
-export function get(
-  personalDataSource: PersonalDataSource
-): Promise<PersonalDocument | null | undefined> {
-  return personalDataSource.get();
-}
+export const get: IFieldResolver<unknown, Context> = (
+  _,
+  __,
+  { dataSources }
+): Promise<PersonalDocument | null | undefined> => {
+  return dataSources.personal.get();
+};

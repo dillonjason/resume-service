@@ -3,8 +3,13 @@ import { FastifyPluginCallback } from "fastify";
 
 import { resolvers } from "./resolvers";
 import { typeDefs } from "./typeDefs";
-import { dataSources } from "./dataSources";
+import { DataSources, dataSources } from "./dataSources";
 import { authenticateRequest } from "../utils/auth";
+
+export interface Context {
+  dataSources: DataSources;
+  authenticated: boolean;
+}
 
 const server = new ApolloServer({
   typeDefs,

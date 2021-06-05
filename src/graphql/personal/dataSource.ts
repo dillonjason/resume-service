@@ -22,7 +22,7 @@ export class PersonalDataSource extends MongoDataSource<PersonalDocument> {
    */
   async update(
     id: string,
-    data: PersonalDocument
+    data: Partial<PersonalDocument>
   ): Promise<PersonalDocument | null> {
     this.deleteFromCacheById(id);
     const newPersonal = await this.model.findByIdAndUpdate(id, data, {
