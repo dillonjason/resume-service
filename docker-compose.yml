@@ -11,6 +11,8 @@ services:
       - "5001:80"
     networks:
       - db-network
+    environment: 
+      - NODE_ENV=development
   auth:
     image: djasuar/auth-service:latest
     container_name: auth-service

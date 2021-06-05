@@ -1,5 +1,5 @@
 import { Schema, Document, Model, model } from "mongoose";
-import { SkillDocument, SkillModel } from "./skills";
+import { SkillDocument, SkillModel } from "./skill";
 
 interface Experience {
   company: string;

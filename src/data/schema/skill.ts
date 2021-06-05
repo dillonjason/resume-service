@@ -1,6 +1,6 @@
 import { Schema, Document, Model, model } from "mongoose";
 
-enum Type {
+export enum Type {
   Language = "language",
   Framework = "framework",
   Orm = "orm",
