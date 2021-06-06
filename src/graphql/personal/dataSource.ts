@@ -25,10 +25,10 @@ export class PersonalDataSource extends MongoDataSource<PersonalDocument> {
     data: Partial<PersonalDocument>
   ): Promise<PersonalDocument | null> {
     this.deleteFromCacheById(id);
-    const newPersonal = await this.model.findByIdAndUpdate(id, data, {
+    const updatedPersonal = await this.model.findByIdAndUpdate(id, data, {
       new: true,
     });
-    return newPersonal;
+    return updatedPersonal;
   }
 
   /**

@@ -15,6 +15,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources,
+  uploads: false,
   context: async ({ request }) => {
     let authenticated = false;
 

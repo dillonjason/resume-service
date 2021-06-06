@@ -1,5 +1,6 @@
 import {
   GraphQLEnumType,
+  GraphQLInputObjectType,
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLString,
@@ -8,16 +9,32 @@ import { Type } from "../../data/schema/skill";
 
 const SkillTypeEnum = new GraphQLEnumType({
   name: "SkillType",
-  values: Object.entries(Type).reduce((values, [key, value]) => {
-    return { ...values, [key]: { value } };
+  values: Object.values(Type).reduce((values, value) => {
+    return { ...values, [value]: {} };
   }, {}),
 });
 
 export const SkillType = new GraphQLObjectType({
   name: "Skill",
   fields: {
+    id: { type: GraphQLNonNull(GraphQLString) },
     type: { type: GraphQLNonNull(SkillTypeEnum) },
     description: { type: GraphQLNonNull(GraphQLString) },
-    icon: { type: GraphQLString },
+  },
+});
+
+export const CreateSkillInputType = new GraphQLInputObjectType({
+  name: "CreateSkill",
+  fields: {
+    type: { type: GraphQLNonNull(SkillTypeEnum) },
+    description: { type: GraphQLNonNull(GraphQLString) },
+  },
+});
+
+export const UpdateSkillInputType = new GraphQLInputObjectType({
+  name: "UpdateSkill",
+  fields: {
+    type: { type: SkillTypeEnum },
+    description: { type: GraphQLString },
   },
 });

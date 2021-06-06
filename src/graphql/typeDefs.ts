@@ -13,7 +13,11 @@ import {
   PersonalType,
   UpdatePersonalInputType,
 } from "./personal/typeDef";
-import { SkillType } from "./skill/typeDef";
+import {
+  CreateSkillInputType,
+  SkillType,
+  UpdateSkillInputType,
+} from "./skill/typeDef";
 
 export const QueryType = new GraphQLObjectType({
   name: "Query",
@@ -27,6 +31,7 @@ export const QueryType = new GraphQLObjectType({
 export const MutationType = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    // Personal Mutations
     createPersonal: {
       type: GraphQLNonNull(PersonalType),
       args: {
@@ -42,6 +47,27 @@ export const MutationType = new GraphQLObjectType({
     },
     deletePersonal: {
       type: GraphQLNonNull(PersonalType),
+      args: {
+        id: { type: GraphQLString },
+      },
+    },
+
+    // Skill Mutations
+    createSkill: {
+      type: GraphQLNonNull(SkillType),
+      args: {
+        data: { type: CreateSkillInputType },
+      },
+    },
+    updateSkill: {
+      type: GraphQLNonNull(SkillType),
+      args: {
+        id: { type: GraphQLString },
+        data: { type: UpdateSkillInputType },
+      },
+    },
+    deleteSkill: {
+      type: GraphQLNonNull(SkillType),
       args: {
         id: { type: GraphQLString },
       },

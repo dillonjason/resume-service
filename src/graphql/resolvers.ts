@@ -10,8 +10,14 @@ export const resolvers: IResolvers = {
     experiences: experienceResolvers.get,
   },
   Mutation: {
+    // Personal Mutations
     createPersonal: personalResolvers.create,
     updatePersonal: personalResolvers.update,
     deletePersonal: personalResolvers.remove,
+
+    // Skill Mutations
+    createSkill: skillResolvers.create,
+    updateSkill: skillResolvers.update,
+    deleteSkill: skillResolvers.remove,
   },
 };
