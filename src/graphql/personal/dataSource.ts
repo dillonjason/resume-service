@@ -5,8 +5,8 @@ export class PersonalDataSource extends MongoDataSource<PersonalDocument> {
   /**
    * Get the latest personal document
    */
-  async get(): Promise<PersonalDocument | null | undefined> {
-    return this.model.findOne({}, {}, { sort: { created_at: 1 } });
+  async getLatest(): Promise<PersonalDocument | null | undefined> {
+    return this.model.findOne({}, {}, { sort: { createdAt: -1 } });
   }
 
   /**
@@ -34,8 +34,8 @@ export class PersonalDataSource extends MongoDataSource<PersonalDocument> {
   /**
    * Remove a personal document
    */
-  async remove(id: string): Promise<void> {
+  async remove(id: string): Promise<PersonalDocument | null> {
     this.deleteFromCacheById(id);
-    await this.model.findByIdAndDelete(id);
+    return this.model.findByIdAndDelete(id);
   }
 }

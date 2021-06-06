@@ -5,7 +5,7 @@ import * as experienceResolvers from "./experience/resolvers";
 
 export const resolvers: IResolvers = {
   Query: {
-    personal: personalResolvers.get,
+    personal: personalResolvers.getLatest,
     skills: skillResolvers.get,
     experiences: experienceResolvers.get,
   },

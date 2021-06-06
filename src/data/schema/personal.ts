@@ -16,36 +16,39 @@ interface Personal {
 export interface PersonalDocument extends Personal, Document {}
 export type PersonalModel = Model<PersonalDocument>;
 
-const PersonalSchema = new Schema<PersonalDocument, PersonalModel>({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: {
-    type: String,
-    required: true,
-    validate: {
-      validator: emailValidator,
+const PersonalSchema = new Schema<PersonalDocument, PersonalModel>(
+  {
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    email: {
+      type: String,
+      required: true,
+      validate: {
+        validator: emailValidator,
+      },
+    },
+    phone: {
+      type: String,
+      required: true,
+      validate: {
+        validator: phoneValidator,
+      },
+    },
+    github: {
+      type: String,
+    },
+    linkedin: {
+      type: String,
+    },
+    resume: {
+      type: String,
+    },
+    bio: {
+      type: String,
     },
   },
-  phone: {
-    type: String,
-    required: true,
-    validate: {
-      validator: phoneValidator,
-    },
-  },
-  github: {
-    type: String,
-  },
-  linkedin: {
-    type: String,
-  },
-  resume: {
-    type: String,
-  },
-  bio: {
-    type: String,
-  },
-});
+  { timestamps: true }
+);
 
 export const PersonalModel = model<PersonalDocument, PersonalModel>(
   "Personal",

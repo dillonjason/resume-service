@@ -8,6 +8,7 @@ import {
 export const PersonalType = new GraphQLObjectType({
   name: "Personal",
   fields: {
+    id: { type: GraphQLNonNull(GraphQLString) },
     firstName: { type: GraphQLNonNull(GraphQLString) },
     lastName: { type: GraphQLNonNull(GraphQLString) },
     email: { type: GraphQLNonNull(GraphQLString) },
