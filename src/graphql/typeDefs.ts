@@ -7,7 +7,11 @@ import {
   printSchema,
 } from "graphql";
 
-import { ExperienceType } from "./experience/typeDef";
+import {
+  CreateExperienceInputType,
+  ExperienceType,
+  UpdateExperienceInputType,
+} from "./experience/typeDef";
 import {
   CreatePersonalInputType,
   PersonalType,
@@ -68,6 +72,27 @@ export const MutationType = new GraphQLObjectType({
     },
     deleteSkill: {
       type: GraphQLNonNull(SkillType),
+      args: {
+        id: { type: GraphQLString },
+      },
+    },
+
+    // Experience Mutations
+    createExperience: {
+      type: GraphQLNonNull(ExperienceType),
+      args: {
+        data: { type: CreateExperienceInputType },
+      },
+    },
+    updateExperience: {
+      type: GraphQLNonNull(ExperienceType),
+      args: {
+        id: { type: GraphQLString },
+        data: { type: UpdateExperienceInputType },
+      },
+    },
+    deleteExperience: {
+      type: GraphQLNonNull(ExperienceType),
       args: {
         id: { type: GraphQLString },
       },

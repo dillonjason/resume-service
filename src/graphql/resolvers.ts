@@ -19,5 +19,10 @@ export const resolvers: IResolvers = {
     createSkill: skillResolvers.create,
     updateSkill: skillResolvers.update,
     deleteSkill: skillResolvers.remove,
+
+    // Experience Mutations
+    createExperience: experienceResolvers.create,
+    updateExperience: experienceResolvers.update,
+    deleteExperience: experienceResolvers.remove,
   },
 };
