@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/config": "^0.0.38",
+    "@types/graphql-upload": "^8.0.4",
     "@types/node": "^14.14.41",
     "@types/node-fetch": "^2.5.10",
     "eslint": "^7.12.1",
@@ -24,6 +25,7 @@
     "apollo-server-fastify": "^2.25.0",
     "config": "^3.3.6",
     "fastify": "^3.14.2",
+    "fastify-plugin": "^3.0.0",
     "graphql": "^15.5.0",
     "graphql-upload": "^12.0.0",
     "jwt-decode": "^3.1.2",

@@ -1,7 +1,26 @@
 import { MongoDataSource } from "apollo-datasource-mongodb";
+import { FileUpload } from "graphql-upload";
 import { SkillDocument } from "../../data/schema/skill";
+import { streamToBuffer } from "../../utils/stream/streamToBuffer";
+
+export interface SkillInput extends Omit<SkillDocument, "icon"> {
+  icon?: Promise<FileUpload>;
+}
 
 export class SkillDataSource extends MongoDataSource<SkillDocument> {
+  private async iconToBuffer(icon?: Promise<FileUpload>) {
+    let iconAsBuffer;
+
+    if (icon) {
+      console.log(icon);
+      const { createReadStream } = await icon;
+      const stream = createReadStream();
+      iconAsBuffer = await streamToBuffer(stream);
+    }
+
+    return iconAsBuffer;
+  }
+
   /**
    * Get all skill documents
    */
@@ -12,8 +31,9 @@ export class SkillDataSource extends MongoDataSource<SkillDocument> {
   /**
    * Create a new skill document
    */
-  async create(data: SkillDocument): Promise<SkillDocument> {
-    const newSkill = await this.model.create(data);
+  async create(data: SkillInput): Promise<SkillDocument> {
+    const icon = await this.iconToBuffer(data.icon);
+    const newSkill = await this.model.create({ ...data, icon });
     return newSkill;
   }
 
@@ -22,12 +42,19 @@ export class SkillDataSource extends MongoDataSource<SkillDocument> {
    */
   async update(
     id: string,
-    data: Partial<SkillDocument>
+    data: Partial<SkillInput>
   ): Promise<SkillDocument | null> {
     this.deleteFromCacheById(id);
-    const updatedSkill = await this.model.findByIdAndUpdate(id, data, {
-      new: true,
-    });
+
+    const icon = await this.iconToBuffer(data.icon);
+
+    const updatedSkill = await this.model.findByIdAndUpdate(
+      id,
+      { ...data, icon },
+      {
+        new: true,
+      }
+    );
     return updatedSkill;
   }
 

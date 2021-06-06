@@ -1,13 +1,17 @@
-import fastify from "fastify";
 import config from "config";
-import { connectDatabase } from "../data";
+import fastify from "fastify";
 
-import personal from "./routes/personal";
+import { connectDatabase } from "../data";
 import { apolloServer } from "../graphql";
+import { gqlUploadPlugin } from "./plugins/gqlUpload";
+import personal from "./routes/personal";
 
 const app = fastify({ logger: true });
 
 (async function () {
+  // GraphQL File Upload
+  app.register(gqlUploadPlugin);
+
   // Connect to database
   app.register(connectDatabase);
 

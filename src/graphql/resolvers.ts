@@ -2,6 +2,7 @@ import { IResolvers } from "graphql-tools";
 import * as personalResolvers from "./personal/resolvers";
 import * as skillResolvers from "./skill/resolvers";
 import * as experienceResolvers from "./experience/resolvers";
+import { GraphQLUpload } from "graphql-upload";
 
 export const resolvers: IResolvers = {
   Query: {
@@ -25,4 +26,5 @@ export const resolvers: IResolvers = {
     updateExperience: experienceResolvers.update,
     deleteExperience: experienceResolvers.remove,
   },
+  Upload: GraphQLUpload,
 };

@@ -5,6 +5,7 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from "graphql";
+import { GraphQLUpload } from "graphql-upload";
 import { Type } from "../../data/schema/skill";
 
 const SkillTypeEnum = new GraphQLEnumType({
@@ -28,6 +29,7 @@ export const CreateSkillInputType = new GraphQLInputObjectType({
   fields: {
     type: { type: GraphQLNonNull(SkillTypeEnum) },
     description: { type: GraphQLNonNull(GraphQLString) },
+    icon: { type: GraphQLUpload },
   },
 });
 
@@ -36,5 +38,6 @@ export const UpdateSkillInputType = new GraphQLInputObjectType({
   fields: {
     type: { type: SkillTypeEnum },
     description: { type: GraphQLString },
+    icon: { type: GraphQLUpload },
   },
 });
